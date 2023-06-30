@@ -1,0 +1,72 @@
+{
+    "skills": [
+      {
+        "category": "Frontend",
+        "skills": [
+          {
+            "icon": "https://i.ibb.co/CWMZn4H/react.png",
+            "name": "React.js"
+          },
+          {
+            "icon": "https://i.ibb.co/XjFNpWG/js.png",
+            "name": "JavaScript"
+          },
+          {
+            "icon": "https://i.ibb.co/qMwtZj3/html-5.png",
+            "name": "HTML5"
+          },
+          {
+            "icon": "https://i.ibb.co/VB8rj9w/css-3.png",
+            "name": "CSS3"
+          },
+          {
+            "icon": "https://i.ibb.co/Rbc3cyp/tailwind.png",
+            "name": "Tailwind"
+          },
+          {
+            "icon": "https://i.ibb.co/wL9rk8h/Bootstrap-logo-svg.png",
+            "name": "Bootstrap"
+          }
+        ]
+      },
+      {
+        "category": "Backend",
+        "skills": [
+          {
+            "icon": "https://i.ibb.co/LPLpmMf/pngegg.png",
+            "name": "Node.js"
+          },
+          {
+            "icon": "https://i.ibb.co/kx57FRb/png-transparent-express-js-node-js-javascript-mongodb-node-js-text-trademark-logo.png",
+            "name": "Express.js"
+          },
+          {
+            "icon": "https://i.ibb.co/C5f9kNw/mongodb.png",
+            "name": "MongoDB"
+          },
+          {
+            "icon": "https://i.ibb.co/WBNvSkx/png-transparent-jwt-io-json-web-token-hd-logo.png",
+            "name": "JWT"
+          }
+        ]
+      },
+      {
+        "category": "Other",
+        "skills": [
+          {
+            "icon": "https://i.ibb.co/3MX7SkF/firebase.png",
+            "name": "Firebase"
+          },
+          {
+            "icon": "https://i.ibb.co/hmkfJTb/Github.png",
+            "name": "GitHub"
+          },
+          {
+            "icon": "https://i.ibb.co/dK0gHms/2560px-Npm-logo-svg.png",
+            "name": "NPM(Node Package Manager)"
+          }
+        ]
+      }
+    ]
+  }
+  
