@@ -54,6 +54,9 @@ async function run() {
     const projectsCollection = client.db("portfolio").collection("projects");
     const blogsCollection = client.db("portfolio").collection("blogs");
     const usersCollection = client.db("portfolio").collection("users");
+    const experienceCollection = client
+      .db("portfolio")
+      .collection("experience");
 
     // Get Requests
 
@@ -87,6 +90,20 @@ async function run() {
       res.send(project);
     });
 
+    // Experience Requests
+    app.get("/experience", async (req, res) => {
+      const result = await experienceCollection.find().toArray();
+      res.send(result);
+    });
+
+    // get a project using id
+    app.get("/experience/:id", async (req, res) => {
+      const id = req.params.id;
+      const query = { _id: new ObjectId(id) };
+      const experience = await experienceCollection.findOne(query);
+      res.send(experience);
+    });
+
     // Blog Requests
     app.get("/blogs", async (req, res) => {
       const result = await blogsCollection.find().toArray();
@@ -106,13 +123,13 @@ async function run() {
       // extract the email and password from request body
       const { email, password } = req.body;
 
-      const query = { email: new ObjectId(email) };
+      const query = { email: email };
       const user = await usersCollection.findOne(query);
       if (!user) {
         res.send({ success: false, message: "User not found" });
       }
 
-      const isPasswordMatched = await bcrypt.compare(password, user.password);
+      const isPasswordMatched = await bcrypt.compare(password, user?.password);
       if (!isPasswordMatched) {
         res.send({ success: false, message: "Password is wrong" });
       }
@@ -149,6 +166,11 @@ async function run() {
       const result = await projectsCollection.insertOne(project);
       res.send(result);
     });
+    app.post("/experience", verifyJWT, async (req, res) => {
+      const experience = req.body;
+      const result = await projectsCollection.insertOne(experience);
+      res.send(result);
+    });
 
     // Add Blog
     app.post("/blogs", verifyJWT, async (req, res) => {
@@ -182,6 +204,31 @@ async function run() {
       } catch (error) {
         console.error(error);
         res.status(500).send({ message: "Error updating project" });
+      }
+    });
+    // update a project info
+    app.patch("/experience/:id", verifyJWT, async (req, res) => {
+      const id = req.params.id;
+      const filter = { _id: new ObjectId(id) };
+      const options = { upsert: true };
+
+      try {
+        const update = {
+          $set: {
+            ...req.body,
+          },
+        };
+
+        const result = await projectsCollection.updateOne(
+          filter,
+          update,
+          options
+        );
+
+        res.send(result);
+      } catch (error) {
+        console.error(error);
+        res.status(500).send({ message: "Error updating experience" });
       }
     });
 
@@ -234,6 +281,15 @@ async function run() {
     });
 
     app.delete("/projects/:id", verifyJWT, async (req, res) => {
+      const id = req.params.id;
+      const query = { _id: new ObjectId(id) };
+
+      const result = await projectsCollection.deleteOne(query);
+
+      res.send(result);
+    });
+
+    app.delete("/experience/:id", verifyJWT, async (req, res) => {
       const id = req.params.id;
       const query = { _id: new ObjectId(id) };
 
